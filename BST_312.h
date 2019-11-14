@@ -1,4 +1,3 @@
-
 /*  BST312.h
   CS 312 Fall 2018
 
@@ -248,6 +247,11 @@ template<class ItemType>
 void BST_312 <ItemType>::makeEmpty(TreeNode*& t)
 {
     //YOUR CODE GOES HERE
+    if(t==NULL)
+        return;
+    deleteNode(t->left);
+    deleteNode(t->right);
+    deleteNode(t);
 }
 
 template<class ItemType>
@@ -285,15 +289,24 @@ bool BST_312 <ItemType>::isFull() const
 template<class ItemType>
 void BST_312 <ItemType>::insertItem(TreeNode*& t, const ItemType& newItem)
 {
-
     //YOUR CODE GOES HERE
-
+    if(t==NULL){
+        t=new TreeNode;
+        t->data=newItem;
+        t->left=NULL;
+        t->right=NULL;
+    }
+    else if(newItem < t->data)
+        insertItem(t->left,newItem);
+    else
+        insertItem(t->right,newItem);
 }
 
 template<class ItemType>
 void BST_312 <ItemType>::insertItem(const ItemType& newItem)
 {
     //YOUR CODE GOES HERE
+    insertItem(root,newItem);
 }
 
 
@@ -302,7 +315,9 @@ template<class ItemType>
 int BST_312 <ItemType>::countNodes(TreeNode* t) const
 {
     //YOUR CODE GOES HERE
-
+    if(t==NULL)
+        return 0;
+    return 1+countNodes(t->left)+countNodes(t->right);
 }
 
 
@@ -310,6 +325,7 @@ template<class ItemType>
 int BST_312 <ItemType>::countNodes()
 {
     //YOUR CODE GOES HERE
+    return countNodes(root);
 }
 
 template<class ItemType>
@@ -352,12 +368,21 @@ vector<ItemType> BST_312 <ItemType>::postOrderTraversal()
     //YOUR CODE GOES HERE
 }
 
+bool BST_312 <ItemType>::isItemInTree(TreeNode* t,const ItemType& item)
+{
+    //YOUR CODE GOES HERE
+    if(t==NULL)
+        return false;
+    if(t->data=item)
+        return true;
+    return (isItemInTree(t->left,item))||(isItemInTree(t->right,item));
+}
+
 template<class ItemType>
 bool BST_312 <ItemType>::isItemInTree(const ItemType& item)
 {
-
   //YOUR CODE GOES HERE
-
+    return isItemInTree(root,item);
 }
 #endif
 
