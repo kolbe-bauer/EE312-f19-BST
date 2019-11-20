@@ -250,8 +250,8 @@ void BST_312 <ItemType>::makeEmpty(TreeNode*& t)
     //YOUR CODE GOES HERE
     if(t==NULL)
         return;
-    deleteNode(t->left);
-    deleteNode(t->right);
+    makeEmpty(t->left);
+    makeEmpty(t->right);
     deleteNode(t);
 }
 
@@ -292,10 +292,11 @@ void BST_312 <ItemType>::insertItem(TreeNode*& t, const ItemType& newItem)
 {
     //YOUR CODE GOES HERE
     if(t==NULL){
-        t=new TreeNode;
-        t->data=newItem;
-        t->left=NULL;
-        t->right=NULL;
+        TreeNode* temp=new TreeNode;
+        temp->data=newItem;
+        temp->left=NULL;
+        temp->right=NULL;
+        t=temp;
     }
     else if(newItem < t->data)
         insertItem(t->left,newItem);

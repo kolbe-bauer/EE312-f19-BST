@@ -22,7 +22,7 @@ void print(vector<T> vec){
 int main() {
 
     ifstream inFile;
-    inFile.open("test.txt");
+    inFile.open("given.txt");
 
     BST_312<string> bst;
    
@@ -48,7 +48,7 @@ int main() {
 
     cout << "Remove items " << endl;
     cout << "number of nodes in tree before delete is " << bst.countNodes() << endl;
-    s = "Tim";
+    s = "tree";
     bst.deleteItem(s);
     print(bst.postOrderTraversal());
     cout << endl;
